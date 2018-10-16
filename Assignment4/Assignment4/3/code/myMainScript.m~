@@ -1,0 +1,14 @@
+%% MyMainScript
+
+tic;
+%%
+%%
+% 
+%  We plotted the min square difference for each image in the testing dataset.
+%  As expected the min square difference is seen to be larger for those images that are new and have no matching identity.
+%  Hence we used a threshold to identify whether the image is unseen(new) or seen
+%  
+
+
+
+toc;

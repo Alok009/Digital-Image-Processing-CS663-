@@ -1,0 +1,185 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>myMainScript</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-08-07"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">MyMainScript</a></li><li><a href="#2">Q2. a) Linear stretching</a></li><li><a href="#6">Q2. b) Histogram equalisation</a></li><li><a href="#10">Q2 c) Histogram Matching</a></li><li><a href="#11">Q2 d)AHE with window size 251</a></li><li><a href="#14">Window size = 31, noisy</a></li><li><a href="#15">Window size = 1001, less contrast</a></li><li><a href="#16">Q2 e)CLAHE with window size = 31, threshold = 10</a></li><li><a href="#19">threshold = 5</a></li></ul></div><h2 id="1">MyMainScript</h2><pre class="codeinput">tic;
+</pre><h2 id="2">Q2. a) Linear stretching</h2><pre class="language-matlab">Formula <span class="string">used:</span>
+ratio = 1/double(maxa-mina);
+img(:,:,n) = double((temp(:,:)-mina))*ratio;
+</pre><pre class="codeinput">myLinearContrastStretching(imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <pre class="codeinput">myLinearContrastStretching(imread(<span class="string">'../data/TEM.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <pre class="codeinput">myLinearContrastStretching(imread(<span class="string">'../data/canyon.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_06.png" alt=""> <pre class="codeinput">myLinearContrastStretching(imread(<span class="string">'../data/church.png'</span>,<span class="string">'png'</span>));
+
+<span class="comment">%   inspite of having a large range of intensities, the intensities are</span>
+<span class="comment">%    grouped together. To improve the contrast a</span>
+<span class="comment">%   non linear stretching is required here. If a linear stretching is used,</span>
+<span class="comment">%   the intensities are still grouped together, and there is not much</span>
+<span class="comment">%   effective increase in contrast.</span>
+</pre><pre class="codeoutput">Warning: Image is too big to fit on screen; displaying at 33% 
+Warning: Image is too big to fit on screen; displaying at 33% 
+</pre><img vspace="5" hspace="5" src="myMainScript_07.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_08.png" alt=""> <h2 id="6">Q2. b) Histogram equalisation</h2><pre class="codeinput">myHE(imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_09.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_10.png" alt=""> <pre class="codeinput">myHE(imread(<span class="string">'../data/canyon.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_11.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_12.png" alt=""> <pre class="codeinput">myHE(imread(<span class="string">'../data/TEM.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_13.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_14.png" alt=""> <pre class="codeinput">myHE(imread(<span class="string">'../data/church.png'</span>,<span class="string">'png'</span>));
+<span class="comment">%  Here the cdf and hence the transformation function rises sharply</span>
+<span class="comment">%  wherever the intensities are grouped together. Hence highly clustered</span>
+<span class="comment">%  intensities get stretched more. This non linear stretching produces much</span>
+<span class="comment">%  greater contrast where it is required</span>
+</pre><pre class="codeoutput">Warning: Image is too big to fit on screen; displaying at 33% 
+Warning: Image is too big to fit on screen; displaying at 33% 
+</pre><img vspace="5" hspace="5" src="myMainScript_15.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_16.png" alt=""> <h2 id="10">Q2 c) Histogram Matching</h2><pre class="codeinput">myHM;
+<span class="comment">%   As the name suggests, the HM produces an output image which has a</span>
+<span class="comment">%   contrast very similar to the reference image provided. This is achieved</span>
+<span class="comment">%   by matching the histogram and hence the cdf of the output image with</span>
+<span class="comment">%   the reference image. That is, the distribution of intensities in the</span>
+<span class="comment">%   output is made to be similar to that of the reference image. The</span>
+<span class="comment">%   difference in contrast is seen because of a discrete CDF and</span>
+<span class="comment">%   discretisation of intensites.</span>
+</pre><pre class="codeoutput">Warning: Image is too big to fit on screen; displaying at 33% 
+Warning: Image is too big to fit on screen; displaying at 33% 
+Warning: Image is too big to fit on screen; displaying at 33% 
+</pre><img vspace="5" hspace="5" src="myMainScript_17.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_18.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_19.png" alt=""> <h2 id="11">Q2 d)AHE with window size 251</h2><pre class="codeinput">myAHE(251, imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_20.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_21.png" alt=""> <pre class="codeinput">myAHE(251, imread(<span class="string">'../data/TEM.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_22.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_23.png" alt=""> <pre class="codeinput">myAHE(251, imread(<span class="string">'../data/canyon.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_24.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_25.png" alt=""> <h2 id="14">Window size = 31, noisy</h2><pre class="codeinput">myAHE(31, imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_26.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_27.png" alt=""> <h2 id="15">Window size = 1001, less contrast</h2><pre class="codeinput">myAHE(1001, imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_28.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_29.png" alt=""> <h2 id="16">Q2 e)CLAHE with window size = 31, threshold = 10</h2><pre class="codeinput">myCLAHE(10, imread(<span class="string">'../data/barbara.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_30.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_31.png" alt=""> <pre class="codeinput">myCLAHE(10, imread(<span class="string">'../data/TEM.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_32.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_33.png" alt=""> <pre class="codeinput">myCLAHE(10, imread(<span class="string">'../data/canyon.png'</span>,<span class="string">'png'</span>));
+</pre><img vspace="5" hspace="5" src="myMainScript_34.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_35.png" alt=""> <h2 id="19">threshold = 5</h2><pre class="codeinput">myCLAHE(5, imread(<span class="string">'../data/canyon.png'</span>,<span class="string">'png'</span>));
+toc;
+</pre><pre class="codeoutput">Elapsed time is 499.432448 seconds.
+</pre><img vspace="5" hspace="5" src="myMainScript_36.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_37.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% MyMainScript
+
+tic;
+%% 
+
+%% Q2. a) Linear stretching
+%   Formula used:
+%   ratio = 1/double(maxa-mina);
+%   img(:,:,n) = double((temp(:,:)-mina))*ratio;
+myLinearContrastStretching(imread('../data/barbara.png','png'));
+%%
+myLinearContrastStretching(imread('../data/TEM.png','png'));
+%%
+myLinearContrastStretching(imread('../data/canyon.png','png'));
+%%
+myLinearContrastStretching(imread('../data/church.png','png'));
+
+%   inspite of having a large range of intensities, the intensities are 
+%    grouped together. To improve the contrast a
+%   non linear stretching is required here. If a linear stretching is used,
+%   the intensities are still grouped together, and there is not much
+%   effective increase in contrast.
+%% Q2. b) Histogram equalisation
+myHE(imread('../data/barbara.png','png'));
+%%
+myHE(imread('../data/canyon.png','png'));
+%%
+myHE(imread('../data/TEM.png','png'));
+%%
+myHE(imread('../data/church.png','png'));
+%  Here the cdf and hence the transformation function rises sharply
+%  wherever the intensities are grouped together. Hence highly clustered
+%  intensities get stretched more. This non linear stretching produces much
+%  greater contrast where it is required
+
+%% Q2 c) Histogram Matching
+myHM;
+%   As the name suggests, the HM produces an output image which has a
+%   contrast very similar to the reference image provided. This is achieved
+%   by matching the histogram and hence the cdf of the output image with
+%   the reference image. That is, the distribution of intensities in the 
+%   output is made to be similar to that of the reference image. The
+%   difference in contrast is seen because of a discrete CDF and 
+%   discretisation of intensites.
+
+%% Q2 d)AHE with window size 251
+myAHE(251, imread('../data/barbara.png','png'));
+%%
+myAHE(251, imread('../data/TEM.png','png'));
+%%
+myAHE(251, imread('../data/canyon.png','png'));
+%% Window size = 31, noisy
+myAHE(31, imread('../data/barbara.png','png'));
+%% Window size = 1001, less contrast
+myAHE(1001, imread('../data/barbara.png','png'));
+%% Q2 e)CLAHE with window size = 31, threshold = 10
+myCLAHE(10, imread('../data/barbara.png','png'));
+%%
+myCLAHE(10, imread('../data/TEM.png','png'));
+%% 
+myCLAHE(10, imread('../data/canyon.png','png'));
+%% threshold = 5
+myCLAHE(5, imread('../data/canyon.png','png'));
+toc;
+
+##### SOURCE END #####
+--></body></html>
