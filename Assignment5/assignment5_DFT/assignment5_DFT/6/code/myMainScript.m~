@@ -1,0 +1,19 @@
+%% MyMainScript
+
+tic;
+%% Without noise
+% Coordinates seen in the matrix shift are as expected : 271,71 that is
+% a shift of -30,70
+translate();
+%% With gaussian noise of 20 standard deviation
+% Here the max value in the matrix shift was small so we clipped the max to
+% 1 so that we could see the point in the image
+% Coordinates seen in the matrix shift are as expected : 271,71 that is
+% a shift of -30,70
+translate1();
+%% Time complexity:
+% Time complexity of this program would be n*nlog(n*n) where n*n is the size of the image.
+% If it is done directly, it would be O((n*n)^2 that is n^4
+% Hence this method is much better in terms of time complexity
+%%
+toc;
